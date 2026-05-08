@@ -16,7 +16,8 @@
     --red:#EF4444;--red-bg:rgba(239,68,68,0.12);
     --blue:#3B82F6;--blue-bg:rgba(59,130,246,0.12);
   }
-  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+  *{font-family:'Segoe UI',system-ui,sans-serif;}
+  body{background:var(--bg);color:var(--text);min-height:100vh;}
   .app{display:flex;min-height:100vh;}
   .sidebar{width:230px;background:var(--surface);display:flex;flex-direction:column;flex-shrink:0;border-right:1px solid var(--border);}
   .logo-area{padding:24px 20px 20px;border-bottom:1px solid var(--border);}
@@ -34,10 +35,25 @@
   .main{flex:1;overflow:auto;display:flex;flex-direction:column;}
   .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;}
   .page-title{font-size:16px;font-weight:700;color:var(--text);}
-  .topbar-right{display:flex;align-items:center;gap:12px;}
-  .user-chip{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 14px 5px 6px;}
+  .topbar-right{display:flex;align-items:center;gap:12px;position:relative;}
+  .user-chip{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 12px 5px 6px;cursor:pointer;transition:all 0.15s;}
+  .user-chip:hover{border-color:var(--accent);}
   .avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;}
   .user-name{font-size:12px;color:var(--text2);}
+  .user-menu{position:absolute;top:44px;right:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,0.5);z-index:100;}
+  .user-menu-title{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);padding:4px 10px 8px;}
+  .user-menu-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;transition:background 0.15s;}
+  .user-menu-item:hover{background:var(--surface2);}
+  .user-menu-info{display:flex;align-items:center;gap:8px;}
+  .user-menu-name{font-size:13px;color:var(--text);}
+  .user-menu-role{font-size:10px;color:var(--text3);}
+  .user-menu-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+  .user-menu-avatar.client{background:var(--blue);}
+  .user-menu-divider{height:1px;background:var(--border);margin:6px 0;}
+  .user-menu-logout{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--red);font-size:13px;transition:background 0.15s;}
+  .user-menu-logout:hover{background:var(--red-bg);}
+  .delete-btn{background:transparent;border:none;color:var(--text3);cursor:pointer;padding:3px 5px;border-radius:4px;font-size:12px;transition:color 0.15s;}
+  .delete-btn:hover{color:var(--red);}
   .content{padding:24px 28px;flex:1;}
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
   .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 16px;}
@@ -69,7 +85,7 @@
   .pub-caption{font-size:13px;color:var(--text2);line-height:1.6;padding-right:32px;}
   .caption-edit-btn{position:absolute;top:0;right:0;background:transparent;border:1px solid var(--border);border-radius:6px;padding:3px 7px;cursor:pointer;color:var(--text3);font-size:12px;transition:all 0.15s;}
   .caption-edit-btn:hover{color:var(--accent);border-color:var(--accent);}
-  .caption-textarea{width:100%;background:var(--surface2);border:1px solid var(--accent);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--text);line-height:1.6;resize:vertical;min-height:80px;margin-bottom:8px;font-family:inherit;}
+  .caption-textarea{width:100%;background:var(--surface2);border:1px solid var(--accent);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--text);line-height:1.6;resize:vertical;min-height:80px;margin-bottom:8px;}
   .caption-textarea:focus{outline:none;}
   .caption-btns{display:flex;gap:6px;}
   .caption-save{font-size:11px;padding:5px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;}
@@ -104,7 +120,8 @@
   .day-btn:hover:not(.sel){background:var(--surface);color:var(--text);}
   .field-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
   .field-label{font-size:12px;color:var(--text2);width:80px;}
-  .form-select{padding:8px 12px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);font-size:13px;color:var(--text);}
+  .form-select,.form-input-sm{padding:8px 12px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);font-size:13px;color:var(--text);}
+  .form-input-sm{flex:1;}
   .schedule-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;}
   .schedule-main{font-size:13px;font-weight:500;color:var(--text);}
   .schedule-days{font-size:11px;color:var(--text3);margin-top:2px;}
@@ -122,7 +139,7 @@
   .form-group{margin-bottom:16px;}
   .form-label{font-size:12px;font-weight:500;margin-bottom:6px;display:block;color:var(--text2);}
   .form-input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);font-size:13px;color:var(--text);}
-  .form-input:focus{outline:none;border-color:var(--accent);}
+  .form-input:focus,.form-input-sm:focus{outline:none;border-color:var(--accent);}
   .btn-login{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:background 0.15s;}
   .btn-login:hover{background:#EA6C0A;}
   .err-msg{font-size:12px;color:var(--red);margin-bottom:10px;}
@@ -136,6 +153,8 @@
   .modal-inner video{max-width:90vw;max-height:86vh;border-radius:10px;}
   .modal-close{position:fixed;top:18px;right:22px;background:rgba(255,255,255,0.1);border:none;border-radius:8px;padding:8px 12px;cursor:pointer;color:#fff;font-size:18px;backdrop-filter:blur(6px);transition:background 0.15s;}
   .modal-close:hover{background:rgba(239,68,68,0.6);}
+  .prompt-input{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);font-size:13px;color:var(--text);margin-bottom:0;}
+  .prompt-input:focus{outline:none;border-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -143,17 +162,28 @@
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script>
-const {useState,useEffect}=React;
+const {useState,useEffect,useRef}=React;
 const h=React.createElement;
 const SUPA_URL='https://zqzkmtlcwmqwwppysout.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxemttdGxjd21xd3dwcHlzb3V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxMDA3MjYsImV4cCI6MjA5MzY3NjcyNn0.guBRwkf0V_gWVM2ogqk70mYUMWjKKhwFiifndWBlwT8';
 const H={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=representation'};
+
 async function fetchPubs(){const r=await fetch(SUPA_URL+'/rest/v1/publicaciones?order=created_at.desc',{headers:H});if(!r.ok)throw new Error();return r.json();}
-async function updateStatus(id,status){const r=await fetch(SUPA_URL+'/rest/v1/publicaciones?id=eq.'+id,{method:'PATCH',headers:H,body:JSON.stringify({status})});if(!r.ok)throw new Error();}
-async function updateCaption(id,caption){const r=await fetch(SUPA_URL+'/rest/v1/publicaciones?id=eq.'+id,{method:'PATCH',headers:H,body:JSON.stringify({caption})});if(!r.ok)throw new Error();}
-const USERS={admin:{pass:'admin123',role:'admin',name:'Nicolas'},cliente:{pass:'wp2024',role:'client',name:'Cliente'}};
+async function updateStatus(id,status){await fetch(SUPA_URL+'/rest/v1/publicaciones?id=eq.'+id,{method:'PATCH',headers:H,body:JSON.stringify({status})});}
+async function updateCaption(id,caption){await fetch(SUPA_URL+'/rest/v1/publicaciones?id=eq.'+id,{method:'PATCH',headers:H,body:JSON.stringify({caption})});}
+async function fetchCalendario(){const r=await fetch(SUPA_URL+'/rest/v1/calendario?order=id.asc',{headers:H});if(!r.ok)throw new Error();return r.json();}
+async function insertCalendario(row){const r=await fetch(SUPA_URL+'/rest/v1/calendario',{method:'POST',headers:H,body:JSON.stringify(row)});if(!r.ok)throw new Error();}
+async function deleteCalendario(id){await fetch(SUPA_URL+'/rest/v1/calendario?id=eq.'+id,{method:'DELETE',headers:H});}
+
 const DAYS_S=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
 const DAYS_F=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+
+// Usuarios guardados en localStorage para persistencia
+function getUsers(){
+  try{const u=localStorage.getItem('postia_users');return u?JSON.parse(u):{admin:{pass:'admin123',role:'admin',name:'Nicolás'},cliente:{pass:'wp2024',role:'client',name:'Cliente'}};}
+  catch(e){return {admin:{pass:'admin123',role:'admin',name:'Nicolás'},cliente:{pass:'wp2024',role:'client',name:'Cliente'}};}
+}
+function saveUsers(u){localStorage.setItem('postia_users',JSON.stringify(u));}
 
 function Modal({url,tipo,onClose}){
   return h('div',{className:'modal-overlay',onClick:onClose},
@@ -166,7 +196,12 @@ function Modal({url,tipo,onClose}){
 
 function Login({onLogin}){
   const [u,setU]=useState('');const [p,setP]=useState('');const [err,setErr]=useState('');
-  const go=()=>{const usr=USERS[u.toLowerCase()];if(usr&&usr.pass===p)onLogin({username:u.toLowerCase(),...usr});else setErr('Usuario o contraseña incorrectos');};
+  const go=()=>{
+    const users=getUsers();
+    const usr=users[u.toLowerCase()];
+    if(usr&&usr.pass===p)onLogin({username:u.toLowerCase(),...usr});
+    else setErr('Usuario o contraseña incorrectos');
+  };
   return h('div',{className:'login-wrap'},
     h('div',{className:'login-bg'}),
     h('div',{className:'login-card'},
@@ -181,9 +216,51 @@ function Login({onLogin}){
 }
 
 function StatusPill({s}){
-  const m={pending:['pending','Pendiente'],approved:['approved','Aprobado'],rejected:['rejected','Rechazado'],published:['published','Publicado'],regenerating:['approved','Regenerando']};
+  const m={pending:['pending','Pendiente'],approved:['approved','Aprobado'],rejected:['rejected','Rechazado'],published:['published','Publicado']};
   const a=m[s]||['pending',s];
   return h('span',{className:'status-pill '+a[0]},a[1]);
+}
+
+function UserMenu({user,onSwitch,onLogout}){
+  const [open,setOpen]=useState(false);
+  const ref=useRef(null);
+  const users=getUsers();
+  useEffect(function(){
+    function handle(e){if(ref.current&&!ref.current.contains(e.target))setOpen(false);}
+    document.addEventListener('mousedown',handle);
+    return function(){document.removeEventListener('mousedown',handle);};
+  },[]);
+  return h('div',{ref:ref,style:{position:'relative'}},
+    h('div',{className:'user-chip',onClick:function(){setOpen(function(o){return !o;})}},
+      h('div',{className:'avatar'},user.name.substring(0,2).toUpperCase()),
+      h('span',{className:'user-name'},user.name),
+      h('i',{className:'ti ti-chevron-down',style:{fontSize:'11px',color:'var(--text3)',marginLeft:'2px'}})
+    ),
+    open&&h('div',{className:'user-menu'},
+      h('div',{className:'user-menu-title'},'Cambiar perfil'),
+      Object.entries(users).map(function(entry){
+        const key=entry[0],u=entry[1];
+        const isActive=key===user.username;
+        return h('div',{key:key,className:'user-menu-item'},
+          h('div',{className:'user-menu-info',onClick:function(){if(!isActive){onSwitch(key,u);setOpen(false);}},style:{flex:1,cursor:isActive?'default':'pointer'}},
+            h('div',{className:'user-menu-avatar'+(u.role==='client'?' client':'')},u.name.substring(0,2).toUpperCase()),
+            h('div',null,
+              h('div',{className:'user-menu-name',style:{color:isActive?'var(--accent)':'var(--text)'}},u.name+(isActive?' ✓':'')),
+              h('div',{className:'user-menu-role'},u.role==='admin'?'Administrador':'Cliente')
+            )
+          ),
+          u.role!=='admin'&&!isActive&&h('button',{className:'delete-btn',title:'Eliminar perfil',onClick:function(e){
+            e.stopPropagation();
+            const updated=getUsers();delete updated[key];saveUsers(updated);setOpen(false);
+          }},h('i',{className:'ti ti-trash'}))
+        );
+      }),
+      h('div',{className:'user-menu-divider'}),
+      h('div',{className:'user-menu-logout',onClick:function(){onLogout();setOpen(false);}},
+        h('i',{className:'ti ti-logout'}),'Cerrar sesión'
+      )
+    )
+  );
 }
 
 function PubCard({pub,onApprove,onReject,loading,onCaptionSave}){
@@ -260,22 +337,71 @@ function Dashboard(){
 }
 
 function CalendarPage(){
-  const [sel,setSel]=useState([0,2,4]);const [hour,setHour]=useState('10');const [type,setType]=useState('image');
-  const [schedules,setSchedules]=useState([{id:1,days:[0,2,4],hour:'10:00',type:'Imagen'},{id:2,days:[3],hour:'18:00',type:'Video'}]);
+  const [sel,setSel]=useState([]);
+  const [hour,setHour]=useState('10');
+  const [type,setType]=useState('imagen');
+  const [prompt,setPrompt]=useState('');
+  const [schedules,setSchedules]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const [toast,setToast]=useState('');
+
+  useEffect(function(){
+    fetchCalendario().then(function(d){setSchedules(d);setLoading(false);}).catch(function(){setLoading(false);});
+  },[]);
+
+  function showToast(m){setToast(m);setTimeout(function(){setToast('');},3000);}
   function toggle(i){setSel(function(prev){return prev.includes(i)?prev.filter(function(d){return d!==i;}):prev.concat([i]);});}
-  function add(){if(!sel.length)return;setSchedules(function(prev){return prev.concat([{id:Date.now(),days:sel.slice().sort(),hour:hour+':00',type:type==='image'?'Imagen':'Video'}]);});setSel([]);}
+
+  function add(){
+    if(!sel.length||!prompt.trim())return;
+    const rows=sel.map(function(dia){return {dia_semana:dia,hora:hour+':00',tipo:type,activo:true,prompt:prompt.trim()};});
+    Promise.all(rows.map(function(r){return insertCalendario(r);}))
+      .then(function(){return fetchCalendario();})
+      .then(function(d){setSchedules(d);setSel([]);setPrompt('');showToast('✅ Programación guardada');})
+      .catch(function(){showToast('Error al guardar');});
+  }
+
+  function remove(id){
+    deleteCalendario(id).then(function(){setSchedules(function(prev){return prev.filter(function(s){return s.id!==id;});});showToast('Programación eliminada');}).catch(function(){showToast('Error al eliminar');});
+  }
+
   return h('div',{className:'content'},
+    toast&&h('div',{className:'success-msg'},toast),
     h('div',{className:'section-title',style:{marginBottom:'6px'}},'Calendario de publicaciones'),
-    h('p',{style:{fontSize:'13px',color:'var(--text3)',marginBottom:'20px'}},'Configurá los días y horarios de generación automática.'),
+    h('p',{style:{fontSize:'13px',color:'var(--text3)',marginBottom:'20px'}},'Configurá los días, horarios y prompts de generación automática.'),
     h('div',{className:'card-panel'},
-      h('div',{className:'panel-label'},'Seleccionar días'),
+      h('div',{className:'panel-label'},'Nueva programación'),
+      h('div',{className:'panel-label',style:{marginTop:'0',marginBottom:'8px'}},'Días'),
       h('div',{className:'days-grid'},DAYS_S.map(function(d,i){return h('div',{key:i,className:'day-btn'+(sel.includes(i)?' sel':''),onClick:function(){toggle(i);}},d);})),
-      h('div',{className:'field-row'},h('span',{className:'field-label'},'Horario'),h('select',{className:'form-select',value:hour,onChange:function(e){setHour(e.target.value);}},['08','09','10','11','12','13','14','15','16','17','18','19','20'].map(function(hh){return h('option',{key:hh,value:hh},hh+':00 hs');}))),
-      h('div',{className:'field-row'},h('span',{className:'field-label'},'Tipo'),h('select',{className:'form-select',value:type,onChange:function(e){setType(e.target.value);}},h('option',{value:'image'},'Imagen'),h('option',{value:'video'},'Video'))),
-      h('button',{className:'btn-primary',style:{marginTop:'4px'},onClick:add},h('i',{className:'ti ti-plus'}),'Agregar')
+      h('div',{className:'field-row'},
+        h('span',{className:'field-label'},'Horario'),
+        h('select',{className:'form-select',value:hour,onChange:function(e){setHour(e.target.value);}},
+          ['08','09','10','11','12','13','14','15','16','17','18','19','20'].map(function(hh){return h('option',{key:hh,value:hh},hh+':00 hs');}))
+      ),
+      h('div',{className:'field-row'},
+        h('span',{className:'field-label'},'Tipo'),
+        h('select',{className:'form-select',value:type,onChange:function(e){setType(e.target.value);}},
+          h('option',{value:'imagen'},'Imagen'),h('option',{value:'video'},'Video'))
+      ),
+      h('div',{className:'field-row',style:{alignItems:'flex-start'}},
+        h('span',{className:'field-label',style:{paddingTop:'8px'}},'Prompt'),
+        h('textarea',{className:'prompt-input',style:{minHeight:'70px',resize:'vertical'},placeholder:'Ej: Genera una imagen fitness motivacional para EvoGym...',value:prompt,onChange:function(e){setPrompt(e.target.value);}})
+      ),
+      h('button',{className:'btn-primary',style:{marginTop:'8px'},disabled:!sel.length||!prompt.trim(),onClick:add},h('i',{className:'ti ti-plus'}),'Agregar programación')
     ),
     h('div',{className:'section-header'},h('div',{className:'section-title'},'Programaciones activas')),
-    schedules.map(function(s){return h('div',{key:s.id,className:'schedule-row'},h('div',null,h('div',{className:'schedule-main'},h('i',{className:'ti ti-'+(s.type==='Imagen'?'photo':'video'),style:{marginRight:'6px'}}),s.type,' — ',s.hour,' hs'),h('div',{className:'schedule-days'},s.days.map(function(d){return DAYS_F[d];}).join(', '))),h('button',{className:'btn-icon',onClick:function(){setSchedules(function(prev){return prev.filter(function(x){return x.id!==s.id;});});}},h('i',{className:'ti ti-trash'})));})
+    loading?h('div',{className:'loading'},'Cargando...'):
+    schedules.length===0?h('div',{className:'empty-state'},h('i',{className:'ti ti-calendar-off'}),h('p',null,'No hay programaciones activas')):
+    schedules.map(function(s){
+      return h('div',{key:s.id,className:'schedule-row'},
+        h('div',null,
+          h('div',{className:'schedule-main'},h('i',{className:'ti ti-'+(s.tipo==='imagen'?'photo':'video'),style:{marginRight:'6px'}}),s.tipo==='imagen'?'Imagen':'Video',' — ',s.hora,' hs'),
+          h('div',{className:'schedule-days'},DAYS_F[s.dia_semana]),
+          s.prompt&&h('div',{style:{fontSize:'11px',color:'var(--text3)',marginTop:'3px',fontStyle:'italic'}},'"'+(s.prompt.substring(0,60))+(s.prompt.length>60?'...':'')+'"')
+        ),
+        h('button',{className:'btn-icon',onClick:function(){remove(s.id);}},h('i',{className:'ti ti-trash'}))
+      );
+    })
   );
 }
 
@@ -289,25 +415,99 @@ function HistoryPage(){
   );
 }
 
+function ConfigPage(){
+  const [users,setUsers]=useState(getUsers());
+  const [newUser,setNewUser]=useState('');
+  const [newPass,setNewPass]=useState('');
+  const [toast,setToast]=useState('');
+  function showToast(m){setToast(m);setTimeout(function(){setToast('');},3000);}
+  function addUser(){
+    if(!newUser.trim()||!newPass.trim())return;
+    const updated=getUsers();
+    updated[newUser.toLowerCase()]={pass:newPass,role:'client',name:newUser};
+    saveUsers(updated);setUsers(getUsers());setNewUser('');setNewPass('');showToast('✅ Cliente agregado');
+  }
+  function deleteUser(key){
+    const updated=getUsers();delete updated[key];saveUsers(updated);setUsers(getUsers());showToast('Usuario eliminado');
+  }
+  return h('div',{className:'content'},
+    toast&&h('div',{className:'success-msg'},toast),
+    h('div',{className:'section-title',style:{marginBottom:'16px'}},'Configuración'),
+    h('div',{className:'card-panel'},
+      h('div',{className:'panel-label'},'Base de datos'),
+      h('div',{style:{fontSize:'13px',color:'var(--text2)',display:'flex',alignItems:'center',gap:'8px'}},h('span',{className:'live-dot'}),'Supabase conectado')
+    ),
+    h('div',{className:'card-panel'},
+      h('div',{className:'panel-label'},'Gestionar clientes'),
+      Object.entries(users).map(function(entry){
+        const key=entry[0],u=entry[1];
+        return h('div',{key:key,style:{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 0',borderBottom:'1px solid var(--border)'}},
+          h('div',null,
+            h('div',{style:{fontSize:'13px',color:'var(--text)',fontWeight:'500'}},u.name),
+            h('div',{style:{fontSize:'11px',color:'var(--text3)'}},key,' · ',u.role==='admin'?'Administrador':'Cliente')
+          ),
+          u.role!=='admin'&&h('button',{className:'btn-icon',onClick:function(){deleteUser(key);}},h('i',{className:'ti ti-trash'}))
+        );
+      }),
+      h('div',{style:{marginTop:'16px',paddingTop:'16px',borderTop:'1px solid var(--border)'}}),
+      h('div',{className:'panel-label'},'Agregar cliente'),
+      h('div',{className:'field-row'},
+        h('input',{className:'form-input-sm',placeholder:'Usuario',value:newUser,onChange:function(e){setNewUser(e.target.value);}}),
+        h('input',{className:'form-input-sm',placeholder:'Contraseña',value:newPass,type:'password',onChange:function(e){setNewPass(e.target.value);}})
+      ),
+      h('button',{className:'btn-primary',onClick:addUser},h('i',{className:'ti ti-plus'}),'Agregar cliente')
+    )
+  );
+}
+
 function App(){
-  const [user,setUser]=useState(null);const [page,setPage]=useState('dashboard');const [pendingCount,setPendingCount]=useState(0);
-  useEffect(function(){if(!user)return;function check(){fetchPubs().then(function(d){setPendingCount(d.filter(function(p){return p.status==='pending';}).length);}).catch(function(){});}check();const iv=setInterval(check,15000);return function(){clearInterval(iv);};},[user]);
+  const [user,setUser]=useState(null);
+  const [page,setPage]=useState('dashboard');
+  const [pendingCount,setPendingCount]=useState(0);
+
+  useEffect(function(){
+    if(!user)return;
+    function check(){fetchPubs().then(function(d){setPendingCount(d.filter(function(p){return p.status==='pending';}).length);}).catch(function(){});}
+    check();const iv=setInterval(check,15000);return function(){clearInterval(iv);};
+  },[user]);
+
   if(!user)return h(Login,{onLogin:setUser});
-  const nav=[{id:'dashboard',label:'Publicaciones',icon:'ti-home'},{id:'calendar',label:'Calendario',icon:'ti-calendar'},{id:'history',label:'Historial',icon:'ti-clock'}];
+
+  const nav=[
+    {id:'dashboard',label:'Publicaciones',icon:'ti-home'},
+    {id:'calendar',label:'Calendario',icon:'ti-calendar'},
+    {id:'history',label:'Historial',icon:'ti-clock'}
+  ];
   if(user.role==='admin')nav.push({id:'config',label:'Configuración',icon:'ti-settings'});
   const titles={dashboard:'Publicaciones',calendar:'Calendario',history:'Historial',config:'Configuración'};
+
+  function switchUser(key,u){setUser({username:key,...u});setPage('dashboard');}
+
   return h('div',{className:'app'},
     h('div',{className:'sidebar'},
-      h('div',{className:'logo-area'},h('div',{className:'logo-title'},h('span',{className:'logo-evo'},'Evo'),'Gym'),h('div',{className:'logo-sub'},user.role==='admin'?'Panel Administrador':'Panel Cliente')),
-      h('div',{className:'nav-section'},h('div',{className:'nav-label'},'Menú'),nav.map(function(n){return h('div',{key:n.id,className:'nav-item'+(page===n.id?' active':''),onClick:function(){setPage(n.id);}},h('i',{className:'ti '+n.icon}),n.label,n.id==='dashboard'&&pendingCount>0&&h('span',{className:'badge-pill'},pendingCount));})),
-      h('div',{className:'sidebar-footer'},h('div',{className:'nav-item',onClick:function(){setUser(null);setPage('dashboard');}},h('i',{className:'ti ti-logout'}),'Cerrar sesión'))
+      h('div',{className:'logo-area'},
+        h('div',{className:'logo-title'},h('span',{className:'logo-evo'},'Evo'),'Gym'),
+        h('div',{className:'logo-sub'},user.role==='admin'?'Panel Administrador':'Panel Cliente')
+      ),
+      h('div',{className:'nav-section'},
+        h('div',{className:'nav-label'},'Menú'),
+        nav.map(function(n){return h('div',{key:n.id,className:'nav-item'+(page===n.id?' active':''),onClick:function(){setPage(n.id);}},h('i',{className:'ti '+n.icon}),n.label,n.id==='dashboard'&&pendingCount>0&&h('span',{className:'badge-pill'},pendingCount));})
+      ),
+      h('div',{className:'sidebar-footer'},
+        h('div',{className:'nav-item',onClick:function(){setUser(null);setPage('dashboard');}},h('i',{className:'ti ti-logout'}),'Cerrar sesión')
+      )
     ),
     h('div',{className:'main'},
-      h('div',{className:'topbar'},h('div',{className:'page-title'},titles[page]),h('div',{className:'topbar-right'},h('div',{className:'user-chip'},h('div',{className:'avatar'},user.name.substring(0,2).toUpperCase()),h('span',{className:'user-name'},user.name)))),
+      h('div',{className:'topbar'},
+        h('div',{className:'page-title'},titles[page]),
+        h('div',{className:'topbar-right'},
+          h(UserMenu,{user:user,onSwitch:switchUser,onLogout:function(){setUser(null);setPage('dashboard');}})
+        )
+      ),
       page==='dashboard'&&h(Dashboard,null),
       page==='calendar'&&h(CalendarPage,null),
       page==='history'&&h(HistoryPage,null),
-      page==='config'&&h('div',{className:'content'},h('div',{className:'section-title',style:{marginBottom:'16px'}},'Configuración'),h('div',{className:'card-panel'},h('div',{className:'panel-label'},'Base de datos'),h('div',{style:{fontSize:'13px',color:'var(--text2)',display:'flex',alignItems:'center',gap:'8px'}},h('span',{className:'live-dot'}),'Supabase conectado')),h('div',{className:'card-panel'},h('div',{className:'panel-label'},'Usuarios'),['admin / admin123 — Administrador','cliente / wp2024 — Cliente'].map(function(u){return h('div',{key:u,style:{fontSize:'13px',color:'var(--text)',padding:'10px 0',borderBottom:'1px solid var(--border)'}},u);})))
+      page==='config'&&user.role==='admin'&&h(ConfigPage,null)
     )
   );
 }
