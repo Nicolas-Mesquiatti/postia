@@ -75,6 +75,11 @@ Sitio web del cliente de demostración — un gimnasio ficticio para el que se g
 ##  Demo
  
 El video de demostración fue editado manualmente para mostrar el flujo real de generación, aprobación y publicación de punta a punta.
+
+
+https://github.com/user-attachments/assets/ec6bfa97-5890-43d1-a073-3d42a608888a
+
+
  
 ---
  
